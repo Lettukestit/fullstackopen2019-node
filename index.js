@@ -31,6 +31,11 @@ let persons = [{
     res.json(persons)
   })
 
+   app.get('/info', (req, res) => {
+     let msg ="puhelinluettelossa on " +persons[0].persons.length + " nimeä<p> nyt on " + new Date().toISOString()
+    res.send(msg)
+  })
+
 //-------
 const port = 3001
 app.listen(port)
