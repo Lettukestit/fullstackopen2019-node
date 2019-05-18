@@ -36,6 +36,20 @@ let persons = [{
     res.send(msg)
   })
 
+  app.get('/api/persons/:id', (req, res) => {
+    const id = Number(req.params.id)
+    const person = persons[0].persons.find(person => {
+      //console.log(parseInt(id), person.id, person.id === parseInt(id))
+      return person.id === id
+    })
+    if(!person) {
+      res.status(404).end()
+    }else {
+      res.json(person)
+    }
+  })
+
+ 
 //-------
 const port = 3001
 app.listen(port)
