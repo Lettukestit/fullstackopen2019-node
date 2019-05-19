@@ -1,5 +1,8 @@
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser')
+
+app.use(bodyParser.json())
 
 //--- express stuff here
 let persons = [{
@@ -56,6 +59,13 @@ let persons = [{
     res.status(204).end()
   })
  
+  app.post('/api/persons', (req, res) => {
+    const person = req.body
+    person.id = Math.floor(Math.random() * 1111)
+    //console.log(person)
+    persons[0].persons.push(person)
+    res.json(persons)
+  })
 //-------
 const port = 3001
 app.listen(port)
