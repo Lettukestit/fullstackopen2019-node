@@ -60,7 +60,17 @@ let persons = [{
   })
  
   app.post('/api/persons', (req, res) => {
+    
     const person = req.body
+    if(!person.number || !person.name) {
+      res.status(500).json({error: 'missing name or number'})
+    }
+
+    if(persons[0].persons.find(p => {
+      return p.name === person.name
+    })) {
+      res.status(500).json({error: 'person exists'})
+    }
     person.id = Math.floor(Math.random() * 1111)
     //console.log(person)
     persons[0].persons.push(person)
