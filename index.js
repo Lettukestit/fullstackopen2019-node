@@ -49,6 +49,12 @@ let persons = [{
     }
   })
 
+  app.delete('/api/persons/:id', (req, res) => {
+    const id = Number(req.params.id)
+    //delete person
+    persons[0].persons = persons[0].persons.filter(person => person.id !== id)
+    res.status(204).end()
+  })
  
 //-------
 const port = 3001
