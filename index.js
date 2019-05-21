@@ -2,9 +2,11 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
+const cors = require('cors')
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :request'))
 app.use(bodyParser.json())
+app.use(cors())
 
 morgan.token('request', function (req, res) { return JSON.stringify(req.body) })
 
@@ -81,6 +83,8 @@ let persons = [{
     res.json(persons)
   })
 //-------
-const port = 3001
-app.listen(port)
-console.log(`Server running on port ${port}`)
+//for heroku
+const PORT = process.env.PORT || 3001
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
+})
