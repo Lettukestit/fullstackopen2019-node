@@ -1,7 +1,9 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const morgan = require('morgan')
 
+app.use(morgan('tiny'))
 app.use(bodyParser.json())
 
 //--- express stuff here
@@ -60,7 +62,7 @@ let persons = [{
   })
  
   app.post('/api/persons', (req, res) => {
-    
+ 
     const person = req.body
     if(!person.number || !person.name) {
       res.status(500).json({error: 'missing name or number'})
