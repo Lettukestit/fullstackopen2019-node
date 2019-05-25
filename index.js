@@ -8,6 +8,9 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms :r
 app.use(bodyParser.json())
 app.use(cors())
 
+//lisätään staattiset sivut
+app.use(express.static('build'))
+
 morgan.token('request', function (req, res) { return JSON.stringify(req.body) })
 
 //--- express stuff here
